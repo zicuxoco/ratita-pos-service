@@ -1,0 +1,125 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'http://maven.ean/content/groups/public/' }
+    }
+}
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+    id 'checkstyle'
+}
+
+ext {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    dropWizardVersion = '0.9.2'
+    jacksonVersion = '2.6.5'
+    jerseyVersion = '2.22.1'
+    poiVersion = '3.13'
+}
+
+repositories {
+    mavenCentral()
+    maven{url{ "http://maven.ean/content/repositories/libs-snapshots-local/"}}
+}
+
+wrapper.gradleVersion = '2.4'
+
+configurations {
+    compile {
+        exclude group: 'com.sun.jersey'
+        exclude group: 'com.sun.jersey.contribs'
+        exclude group: 'javax.ws.rs', module: 'jsr311-api'
+        exclude group: 'org.codehaus.jackson'
+    }
+    all {
+        resolutionStrategy.force(
+                "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+                "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+                "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",
+                "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonVersion}",
+                "com.fasterxml.jackson.datatype:jackson-datatype-jdk7:${jacksonVersion}",
+                "com.fasterxml.jackson.datatype:jackson-datatype-guava:${jacksonVersion}",
+                "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonVersion}",
+                "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:${jacksonVersion}"
+        )
+    }
+}
+
+dependencies {
+    compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    compile "com.fasterxml.jackson.module:jackson-module-afterburner:${jacksonVersion}"
+    compile "io.dropwizard:dropwizard-core:${dropWizardVersion}"
+    compile "io.dropwizard:dropwizard-client:${dropWizardVersion}"
+    compile 'org.apache.commons:commons-collections4:4.0'
+    compile 'org.apache.commons:commons-csv:1.1'
+    compile 'commons-collections:commons-collections:3.2.1'
+    compile 'com.amazonaws:aws-java-sdk-s3:1.10.4.1'
+
+    compile "org.apache.poi:poi:$poiVersion"
+    compile "org.apache.poi:poi-ooxml:$poiVersion"
+    compile 'org.apache.poi:ooxml-schemas:1.1'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.hamcrest:java-hamcrest:2.0.0.0'
+    testCompile 'org.mockito:mockito-core:2.0.31-beta'
+
+    testCompile 'com.github.tomakehurst:wiremock:1.57'
+    testCompile "org.glassfish.jersey.connectors:jersey-apache-connector:$jerseyVersion"
+    testCompile "org.glassfish.jersey.media:jersey-media-json-jackson:$jerseyVersion"
+    testCompile 'org.apache.tika:tika-core:1.9'
+    testCompile 'org.apache.httpcomponents:httpcomponents-client:4.5'
+}
+
+def configDir = new File(rootDir, 'config')
+
+checkstyle {
+    configFile = new File("$configDir/checkstyle/checkstyle.xml")
+    toolVersion = "6.7"
+}
+
+mainClassName = 'com.ratita.pos.PosApplication'
+
+test {
+    useJUnit {
+        excludeCategories = ["com.ratita.pos.categories.Functional"] as Set
+        includeCategories = ["com.ratita.pos.categories.Integration", "com.ratita.pos.categories.Unit"] as Set
+    }
+
+    description = 'Runs the Unit and Integration tests.'
+}
+
+task unitTest(type: Test) {
+    useJUnit {
+        excludeCategories = ["com.ratita.pos.categories.Functional", "com.ratita.pos.categories.Integration"] as Set
+        includeCategories = ["com.ratita.pos.categories.Unit"] as Set
+    }
+
+    description = 'Runs the Unit tests.'
+    group = 'Verification'
+}
+
+task integrationTest(type: Test) {
+    useJUnit {
+        excludeCategories = ["com.ratita.pos.categories.Functional", "com.ratita.pos.categories.Unit"] as Set
+        includeCategories = ["com.ratita.pos.categories.Integration"] as Set
+    }
+
+    description = 'Runs the Integration tests.'
+    group = 'Verification'
+}
+
+task functionalTest(type: Test) {
+    useJUnit {
+        excludeCategories = ["com.ratita.pos.categories.Integration", "com.ratita.pos.categories.Unit"] as Set
+        includeCategories = ["com.ratita.pos.categories.Functional"] as Set
+    }
+
+    description = 'Runs the Functional tests.'
+    group = 'Verification'
+}
+
