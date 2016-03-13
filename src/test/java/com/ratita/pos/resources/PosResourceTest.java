@@ -1,7 +1,7 @@
 package com.ratita.pos.resources;
 
 import com.ratita.pos.categories.Unit;
-import com.ratita.pos.domain.Product;
+import com.ratita.pos.domain.Offer;
 import com.ratita.pos.pz.PosPzClient;
 
 import java.util.List;
@@ -66,7 +66,7 @@ public class PosResourceTest {
         when(client.getPosPermissions(anyString())).thenReturn(1);
         PosResource resource = new PosResource((ids, request) -> Stream.empty(), resolver, client);
 
-        Response response = resource.getPos(null, null, null);
-        assertThat((List<Product>) response.getEntity(), emptyCollectionOf(Product.class));
+        Response response = resource.getPosContext(null, null, null);
+        assertThat((List<Offer>) response.getEntity(), emptyCollectionOf(Offer.class));
     }
 }

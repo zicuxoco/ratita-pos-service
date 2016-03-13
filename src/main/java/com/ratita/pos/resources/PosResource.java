@@ -1,6 +1,6 @@
 package com.ratita.pos.resources;
 
-import com.ratita.pos.domain.Product;
+import com.ratita.pos.domain.Offer;
 import com.ratita.pos.pz.PosPzClient;
 
 import java.util.Locale;
@@ -21,11 +21,11 @@ import javax.ws.rs.core.Response;
  */
 @Path(value = "/pos")
 public class PosResource {
-    private final BiFunction<Set<Long>, PosRequest, Stream<Product>> productFetcher;
+    private final BiFunction<Set<Long>, PosRequest, Stream<Offer>> productFetcher;
     private final PosPzClient pzClient;
     private final Function<String, Locale> localeResolver;
 
-    public PosResource(@NotNull BiFunction<Set<Long>, PosRequest, Stream<Product>> productFetcher,
+    public PosResource(@NotNull BiFunction<Set<Long>, PosRequest, Stream<Offer>> productFetcher,
                        @NotNull Function<String, Locale> localeResolver,
                        @NotNull PosPzClient pzClient) {
         Objects.requireNonNull(productFetcher, "PosResource cannot function without a product fetcher.");
@@ -36,7 +36,7 @@ public class PosResource {
         this.pzClient = pzClient;
     }
 
-    public Response getPos(
+    public Response getPosContext(
         @QueryParam("id") Set<Long> productIds,
         @QueryParam("locale") String isoString,
         @QueryParam("key") String posKey) {
