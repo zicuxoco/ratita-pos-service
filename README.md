@@ -1,11 +1,11 @@
 # ratita-pos-service
 Rest Web Service for ratitaPos
 
-This is a demo that contains a little Rest API, basically the API is a Offers provider, this WS have a differents levels of permissions, some users can access only for see the offers, another one can to request a more detail offers and other (the administrator) can modify the offers, offer to other customers this one offers, etc
+This is a demo that contains a little Rest API, basically the API is a Offers provider, this WS have a differents levels of permissions, some users can access only for see the offers, another one can to request a more detail offers and other (the administrator) can modify the offers, offer to other customers this one offers, etc.
 
 This project was built using Test driven development(TDD) creating a suite of Functional test, Unit test (in the future Integration test)
 
-actually the web services and endpoints only are a test case, I mean, this is not alocated in any server, but all the test cases run on the web service and endpoints
+Actually the web services and endpoints only are a test case, I mean, this is not hosted in any server, I make the virtualization of servers and mocks into of some test utils. But all the test cases run on the web service and endpoints
 
 # Tools
 For the construction of this project I used:
