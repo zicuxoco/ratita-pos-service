@@ -26,3 +26,6 @@ For the construction of this project I used:
   
   ![alt tag]
   
+  # CheckStyle
+  I included a cehckStyle module, this is called into of gradle and execute the rules contained in checkStyle.xml
+  
