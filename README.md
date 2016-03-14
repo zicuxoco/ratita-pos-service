@@ -18,7 +18,7 @@ For the construction of this project I used:
   Sonar: complete suite for quality of code
   Jacoco: thats support completly Jaca 8 and @Rules Junit and by default is the code coverage tool for sonar
   
-  # Quality code and Code coverage
+# Quality code and Code coverage
   I created a branch and you can take a look of this, the branch is ratita-pos-service-sonar-bamboo, here I have implemented Sonar and Jacoco, you can test it with gradle (./gradlew if you prefer) tasks for see if all is good, you can see in "other tasks" the task jacocoTestReport, you can execute this and see the report in buil/reports/jacoco
   For the use of Sonar you need to set your server and database, actually in "build.properties" files not is setted the host because this can setted in a Job into of bamboo of Jenkins, I mean in an environment of CI
   
