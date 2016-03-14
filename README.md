@@ -5,6 +5,8 @@ This branch was created for run Sonar and JAcoco and obtain the code coverage
 
 # Use of the branch
 In Git console, you can type ./gradlew (or gradle) tasks for see that the project have the correct configuration for all the tasks and that the jacocoTest and sonarqube tasks; after of that we will found the results in the build folder and the results on Sonar web page server.
+For to execute the Jacoco test use 'gradle test jacocoTestReport' and see into of build/reports/jacoco
+For sonar you can to execute 'gradle sonarqube --stacktrace' and see in the sonar page you sonar an jacoco report
 
 # Motivation
 I decided to use Jacoco instead of Clover (from attlassian) or Cobertura for differents reasons
