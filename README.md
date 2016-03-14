@@ -24,8 +24,10 @@ For the construction of this project I used:
   
   this is a screenshot of the code coverage, but you can see direcly in the branch above and geterate it
   
-  ![alt tag]
+  ![alt tag](https://github.com/zicuxoco/ratita-pos-service/blob/ratita-pos-service-sonar-bamboo/src/test/resources/screenshots/jacocoReport.PNG)
   
   # CheckStyle
-  I included a cehckStyle module, this is called into of gradle and execute the rules contained in checkStyle.xml
+  I included a cehckStyle module, this is called into of build.gradle and execute the rules contained in checkStyle.xml
+  
+  Any doubt please let me know!!!
   
