@@ -1,7 +1,11 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven { url 'http://maven.ean/content/groups/public/' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+
+    dependencies {
+        classpath 'org.sonarqube.gradle:gradle-sonarqube-plugin:1.1'
     }
 }
 
@@ -10,7 +14,11 @@ plugins {
     id 'application'
     id 'idea'
     id 'checkstyle'
+    id 'jacoco'
 }
+
+apply plugin: 'jacoco'
+apply plugin: 'sonar'
 
 ext {
     sourceCompatibility = 1.8
