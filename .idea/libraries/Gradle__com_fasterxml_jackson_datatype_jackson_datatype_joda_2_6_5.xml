@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-joda:2.6.5">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-joda/2.6.5/24830c2dd329c860071fc302a560162cc7f58e20/jackson-datatype-joda-2.6.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-joda/2.6.5/69e5ac2f36c9bd1c3adb505c419398e5511f75d4/jackson-datatype-joda-2.6.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
