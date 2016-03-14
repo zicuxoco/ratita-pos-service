@@ -10,7 +10,7 @@ import org.apache.commons.lang3.math.NumberUtils;
  * Represents configuration for the Pos Service as configured by environment variables.
  *
  */
-public class PosServiceEndpoint {
+public class OfferServiceEndpoint {
     private static final String DEFAULT_POS_PATH = "/pos";
     private static final String DEFAULT_POS_CACHE_PATH = "/tasks/posCacheStats";
     private static final String DEFAULT_SORT_CACHE_PATH = "/tasks/sortCacheStats";
@@ -27,7 +27,7 @@ public class PosServiceEndpoint {
     /**
      * Instantiates a new Deals service endpoint.
      */
-    public PosServiceEndpoint() {
+    public OfferServiceEndpoint() {
         host = getEnvironmentString(System.getenv("SERVICE_POS_HOST"), "");
         path = getEnvironmentString(System.getenv("SERVICE_POS_PATH"), DEFAULT_POS_PATH);
         posCachePath = getEnvironmentString(System.getenv("SERVICE_POS_CACHE_PATH"), DEFAULT_POS_CACHE_PATH);

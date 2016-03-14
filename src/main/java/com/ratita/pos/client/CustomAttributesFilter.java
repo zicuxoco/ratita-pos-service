@@ -7,11 +7,11 @@ import java.util.function.Predicate;
 /**
  * @author z.martinez.ramirez on 09/03/2016.
  */
-public class PZAttributesFilter implements Predicate<Attribute> {
+public class CustomAttributesFilter implements Predicate<Attribute> {
 
     private final String attributeName;
 
-    public PZAttributesFilter(String attributeName) {
+    public CustomAttributesFilter(String attributeName) {
         this.attributeName = attributeName;
     }
     @Override

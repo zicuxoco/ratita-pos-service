@@ -4,7 +4,7 @@ import com.ratita.pos.categories.Functional;
 import com.ratita.pos.domain.Offer;
 import com.ratita.pos.rules.OfferClient;
 import com.ratita.pos.utils.OfferRequestBuilder;
-import com.ratita.pos.utils.PosServiceEndpoint;
+import com.ratita.pos.utils.OfferServiceEndpoint;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import static org.hamcrest.Matchers.emptyArray;
+import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
@@ -34,7 +35,7 @@ import static org.junit.Assert.assertThat;
 @Category(Functional.class)
 public class PosProductListCollectTest {
 
-    private static final PosServiceEndpoint POS_SERVICE_ENDPOINT = new PosServiceEndpoint();
+    private static final OfferServiceEndpoint POS_SERVICE_ENDPOINT = new OfferServiceEndpoint();
     private static final String PRODUCT_COLLECT_KEY = "123321";
     private static final String NON_PRODUCT_COLLECT_KEY = "321123";
 
@@ -90,7 +91,24 @@ public class PosProductListCollectTest {
         assertThat("Response " + collectMessage + "should not be null.", collectOffers, is(notNullValue()));
         assertThat("Response " + collectMessage + "should not be empty.", collectOffers, is(not(emptyArray())));
 
+        Response nonCollectResponse = new OfferRequestBuilder(CLIENT)
+            .getClient(NON_PRODUCT_COLLECT_KEY)
+            .withProductIds(directStoreAgencyIds)
+            .getResponse();
+
+        assertThat(nonCollectResponse, is(notNullValue()));
+        assertThat(nonCollectResponse, is(HttpStatus.SC_OK));
+        Offer[] nonCollectOffers = nonCollectResponse.readEntity(Offer[].class);
+        assertThat("Response " + nonCollectMessage + " should not be null.", nonCollectOffers, is(notNullValue()));
+        assertThat("Response " + nonCollectMessage + " should not be empty.", nonCollectOffers, is(not(emptyArray())));
+
+        assertThat(
+            "The size of the response "
+            + nonCollectMessage
+            + " should be less than the size of the response "
+            + collectMessage
+            + ".",
+            nonCollectOffers.length,
+            is(lessThan(collectOffers.length)));
     }
-
-
 }

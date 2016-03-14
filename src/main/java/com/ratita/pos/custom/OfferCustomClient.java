@@ -1,4 +1,4 @@
-package com.ratita.pos.pz;
+package com.ratita.pos.custom;
 
 import com.ratita.pos.domain.PosPermissions;
 
@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * @author z.martinez.ramirez on 09/03/2016.
  */
-public interface PosPzClient {
+public interface OfferCustomClient {
 
     String PACKAGE_RATE_PERMISSIONS_TYPE = "PACKAGE_RATE_PERMISSIONS_TYPE";
     String ATLANTIS_MOBILE_RATES = "ATLANTIS_MOBILE_RATES";
@@ -19,9 +19,9 @@ public interface PosPzClient {
 
     boolean getDirectAgencyAllowed(String posKey);
 
-    static PosPzClient get(PZClient client) {
+    static OfferCustomClient get(CustomClient client) {
         final String direct = "DIRECT";
-        return new PosPzClient() {
+        return new OfferCustomClient() {
             @Override
             public int getPosPermissions(String posKey) {
                 return PosPermissions

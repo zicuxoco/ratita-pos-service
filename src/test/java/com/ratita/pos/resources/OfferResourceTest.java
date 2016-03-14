@@ -2,7 +2,7 @@ package com.ratita.pos.resources;
 
 import com.ratita.pos.categories.Unit;
 import com.ratita.pos.domain.Offer;
-import com.ratita.pos.pz.PosPzClient;
+import com.ratita.pos.custom.OfferCustomClient;
 
 import java.util.List;
 import java.util.Locale;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
  * @author z.martinez.ramirez on 09/03/2016.
  */
 @Category(Unit.class)
-public class PosResourceTest {
+public class OfferResourceTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
@@ -34,39 +34,39 @@ public class PosResourceTest {
     public void test_Construct_Null_Everything() throws Exception {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage("fetcher");
-        new PosResource(null, null, null);
+        new OfferResource(null, null, null);
     }
 
     @Test
     public void test_Construct_Null_Fetcher() throws Exception {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage("fetcher");
-        new PosResource(null, locale -> null, mock(PosPzClient.class));
+        new OfferResource(null, locale -> null, mock(OfferCustomClient.class));
     }
 
     @Test
     public void test_Construct_Null_Resolver() throws Exception {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage("resolver");
-        new PosResource((ids, request) -> null, null, mock(PosPzClient.class));
+        new OfferResource((ids, request) -> null, null, mock(OfferCustomClient.class));
     }
 
     @Test
     public void test_Construct_Null_PZClient() throws Exception {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage("PZ");
-        new PosResource((ids, request) -> null, locale -> null, null);
+        new OfferResource((ids, request) -> null, locale -> null, null);
     }
 
     @Test
     public void test_Retrieve_Pos() throws Exception {
         Function<String, Locale> resolver = locale -> Locale.CANADA;
-        PosPzClient client = mock(PosPzClient.class);
+        OfferCustomClient client = mock(OfferCustomClient.class);
         when(client.getMobileDealsAllowed(anyString())).thenReturn(true);
         when(client.getPosPermissions(anyString())).thenReturn(1);
-        PosResource resource = new PosResource((ids, request) -> Stream.empty(), resolver, client);
+        OfferResource resource = new OfferResource((ids, request) -> Stream.empty(), resolver, client);
 
-        Response response = resource.getPosContext(null, null, null);
+        Response response = resource.getOffers(null, null, null);
         assertThat((List<Offer>) response.getEntity(), emptyCollectionOf(Offer.class));
     }
 }

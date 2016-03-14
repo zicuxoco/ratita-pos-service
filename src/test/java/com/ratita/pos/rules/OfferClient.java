@@ -1,7 +1,7 @@
 package com.ratita.pos.rules;
 
 import com.ratita.pos.serialization.ObjectMapperProvider;
-import com.ratita.pos.utils.PosServiceEndpoint;
+import com.ratita.pos.utils.OfferServiceEndpoint;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -15,18 +15,19 @@ import org.junit.rules.ExternalResource;
 
 /**
  * @author z.martinez.ramirez on 12/03/2016.
+ * @Rule used for the implementation of service
  */
 public class OfferClient extends ExternalResource {
 
     private static final String DEFAULT_SCHEME = "http";
 
-    private final PosServiceEndpoint endpoint;
+    private final OfferServiceEndpoint endpoint;
 
     private Client offerClient;
     private WebTarget posTarget;
     private WebTarget adminTarget;
 
-    public OfferClient(PosServiceEndpoint endpoint) {
+    public OfferClient(OfferServiceEndpoint endpoint) {
         this.endpoint = endpoint;
     }
 

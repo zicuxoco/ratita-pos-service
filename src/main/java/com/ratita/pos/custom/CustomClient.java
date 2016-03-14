@@ -1,6 +1,6 @@
-package com.ratita.pos.pz;
+package com.ratita.pos.custom;
 
-import com.ratita.pos.client.PZAttributesFilter;
+import com.ratita.pos.client.CustomAttributesFilter;
 import com.ratita.pos.domain.Attribute;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 /**
  * @author z.martinez.ramirez on 09/03/2016.
  */
-public interface PZClient {
+public interface CustomClient {
     @NotNull
     List<Attribute> getAttributes(String key);
 
@@ -26,7 +26,7 @@ public interface PZClient {
 
     default String getAttribute(String cid, String attributeName, String defaultValue) {
         return getAttributeStream(cid)
-            .filter(new PZAttributesFilter(attributeName))
+            .filter(new CustomAttributesFilter(attributeName))
             .findFirst()
             .map(Attribute::getValue)
             .orElse(defaultValue);
